@@ -36,4 +36,18 @@ class AvgBucketAggregationTest extends \PHPUnit_Framework_TestCase
         $aggregation = new AvgBucketAggregation('foo', 'foo>bar');
         $this->assertEquals('avg_bucket', $aggregation->getType());
     }
+
+    /**
+     * Tests if the exception is thrown in getArray method if no
+     * buckets_path is set
+     *
+     * @expectedException \LogicException
+     * @expectedExceptionMessage Avg bucket aggregation must have buckets_field set.
+     */
+    public function testGetArrayException()
+    {
+        $agg = new AvgBucketAggregation('test');
+
+        $agg->getArray();
+    }
 }
